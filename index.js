@@ -40,17 +40,17 @@ console.log(os.userInfo())
 // }
 
 
-const read = fs.createReadStream("input.txt", "utf-8")
-read.on('data', (chunk) => {
-    console.log("chunk of data is fetched", chunk)
-})
-read.on('end', () => {
-    console.log("all data is get here")
-})
-read.on('error', (err) => {
-    console.log("error is occured", err)
-})
-const write = fs.createWriteStream("output.txt")
+// const read = fs.createReadStream("input.txt", "utf-8")
+// read.on('data', (chunk) => {
+//     console.log("chunk of data is fetched", chunk)
+// })
+// read.on('end', () => {
+//     console.log("all data is get here")
+// })
+// read.on('error', (err) => {
+//     console.log("error is occured", err)
+// })
+// const write = fs.createWriteStream("output.txt")
 
 
 // read.pipe(write)
@@ -63,18 +63,31 @@ const write = fs.createWriteStream("output.txt")
 // })
 
 
-const upperCaseStream = new Transform({
-    transform(chunk, encoding, callback) {
-        const upperCase = chunk.toString().toUpperCase();
-        callback(null, upperCase)
-    }
+// const upperCaseStream = new Transform({
+//     transform(chunk, encoding, callback) {
+//         const upperCase = chunk.toString().toUpperCase();
+//         callback(null, upperCase)
+//     }
 
-})
-read.pipe(upperCaseStream).pipe(write)
-write.on('finish', () => {
-    console.log("transform is completed")
+// })
+// read.pipe(upperCaseStream).pipe(write)
+// write.on('finish', () => {
+//     console.log("transform is completed")
 
+// })
+// read.on('error', (err) => {
+//     console.log("error is occured", err)
+// })
+
+const express = require("express")
+const app = express()
+require("dotenv").config()
+
+const port = 5000
+
+app.get("/", (req, res) => {
+    res.send("this is home route")
 })
-read.on('error', (err) => {
-    console.log("error is occured", err)
+app.listen(port, () => {
+    console.log(`server is running at port number http://localhost:${port}`)
 })
